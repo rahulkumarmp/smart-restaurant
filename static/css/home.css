@@ -1,0 +1,213 @@
+.popup {
+    display: none; /* Hide the popup by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 60px;
+    z-index: 999;
+}
+
+body {
+    background-color: #977575; /* Light gray background color */
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 200%; /* Ensure the container covers the entire popup content */
+}
+
+.section {
+    text-align: center;
+    flex: 1;
+}
+
+.separator {
+    width: 5px;
+    height: 100%; /* Ensure the separator spans the full height of its container */
+    background-color: white;
+    margin: 0 40px; /* Adjust spacing */
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.qr-code img {
+    max-width: 200px; /* Reduce QR code size */
+    max-height: 180px;
+}
+
+.order-form {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* static/css/style.css */
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.menu-item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.menu-image img {
+    width: 100%;
+    height: auto;
+}
+
+.menu-details {
+    padding: 20px;
+}
+
+.menu-details h2 {
+    margin-top: 0;
+}
+
+.menu-details p {
+    margin: 10px 0;
+}
+
+.add-to-cart-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #0056b3;
+}
+
+/*CSS styles for the home page*/
+.container {
+    display: flex;
+}
+
+#food-images {
+    /* Styles for food images */
+    flex: 1; /* Take remaining space */
+}
+
+#food-imagess {
+    /* Styles for food images */
+    flex: 1; /* Take remaining space */
+}
+
+/*.cart {*/
+/*    !* Styles for the cart *!*/
+/*    width: 30%; !* Set cart width to 20% of the page *!*/
+/*    !*flex-shrink: 0; !* Prevent cart from shrinking *!*!*/
+/*    margin-left: 20px; !* Add space between food images and cart *!*/
+/*}*/
+
+.cart {
+    height: 90vh;
+    max-width: 400px;
+    width: 30%; /* Set cart width */
+    margin-left: 20px; /* Add space between food images and cart */
+    background-color: #f8f9fa; /* Set background color */
+    border: 1px solid #ced4da; /* Add border */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+    padding: 30px; /* Add padding */
+}
+
+.cart h2 {
+    color: #333; /* Set heading color */
+    margin-bottom: 10px; /* Add margin below heading */
+}
+
+#cart-items {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+}
+
+.cart-item {
+    margin-bottom: 10px; /* Add margin between cart items */
+}
+
+.cart-item p {
+    margin: 5px 0; /* Add margin to paragraph elements */
+}
+
+#checkout-btn {
+    background-color: #007bff; /* Set button background color */
+    color: #fff; /* Set button text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Add padding */
+    border-radius: 5px; /* Add border radius */
+    cursor: pointer; /* Add pointer cursor */
+    transition: background-color 0.3s ease; /* Add transition */
+}
+
+#checkout-btn:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #301111;
+}
+
+.cart-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            background-color: #0056b3;
+        }

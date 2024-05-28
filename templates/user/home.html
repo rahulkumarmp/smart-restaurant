@@ -1,0 +1,188 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+<div class="container">
+    <!-- Food images and other content for the home page -->
+    {% if not is_active %}
+    <div id="food-images">
+        <!-- Add your food images here -->
+        <img src="/static/images/login.jpg" alt="Food Image 1">
+        <img src="/static/images/login.jpg" alt="Food Image 2">
+        <img src="/static/images/login.jpg" alt="Food Image 1">
+        <img src="/static/images/login.jpg" alt="Food Image 2">
+        <img src="/static/images/login.jpg" alt="Food Image 1">
+        <img src="/static/images/login.jpg" alt="Food Image 2">
+        <!-- Add more food images as needed -->
+    </div>
+    {% else %}
+    <div id="food-imagess">
+        <div class="header">
+            <h1>TODAY'S MENU</h1>
+            <button class="cart-btn" onclick="window.location.href='/cart'">Go to Cart</button>
+        </div>
+
+        <!--            <h2>Menu</h2>-->
+        <div class="menu">
+            {% for item in menu %}
+            <div class="menu-item">
+                <div class="menu-image">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                </div>
+                <div class="menu-details">
+                    <h2>{{ item.name }}</h2>
+                    <p>{{ item.description }}</p>
+                    <p>Price: ${{ item.price }}</p>
+                    <button class="add-to-cart-btn" data-item-id="{{ item.id }}">Add to Cart</button>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Cart section -->
+    <!--    <div class="cart">-->
+    <!--        &lt;!&ndash; Add cart content here &ndash;&gt;-->
+    <!--        <h2>Cart</h2>-->
+    <!--        <ul id="cart-items">-->
+    <!--            &lt;!&ndash; Cart items will be dynamically added here &ndash;&gt;-->
+    <!--        </ul>-->
+    <!--        <button id="checkout-btn">Checkout</button>-->
+    <!--    </div>-->
+</div>
+
+
+<!-- Popup for ordering food -->
+<div id="overlay"></div>
+<div id="order-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+        <div class="section">
+            <h2>Order Your Food Here</h2>
+            <!--            <form action="" method="post" class="order-form">-->
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile:</label>
+                <input type="text" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+            </div>
+            <input type="submit" value="Order" id="submitBtn" class="submit-btn">
+            <!--            </form>-->
+
+        </div>
+        <div class="separator"><b>OR</b></div>
+
+        <div class="section">
+            <h2>Order Your Food Here with QR Code</h2>
+            <div class="qr-code">
+                <!-- Your QR code image or scanner component goes here -->
+                <img src="/static/images/qrdemo.jpg" alt="QR Code">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+<!--<script src="script.js"></script> &lt;!&ndash; Add your JavaScript file &ndash;&gt;-->
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+    function showPopup() {
+        var is_active = "{{ is_active }}"
+        if (is_active === 'False') {
+            document.getElementById("order-popup").style.display = "block";
+        }
+    }
+
+    window.onload = function () {
+        showPopup();
+    };
+
+    function openPopup(popupId) {
+        document.getElementById(popupId).style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+    }
+
+    function closePopup(popupId) {
+        document.getElementById(popupId).style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+    }
+
+    $(document).ready(function () {
+        $('#submitBtn').click(function (event) {
+            event.preventDefault();
+            var name = $('#name').val();
+            var mobile = $('#mobile').val();
+            var username = "11";
+            var password = "11";
+
+            $.ajax({
+                type: 'POST',
+                url: '/add_customer/',  // URL to your Django view
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'name': name,
+                    'mobile': mobile,
+                    'username': username,
+                    'password': password
+                },
+                success: function (response) {
+                    // Handle success response
+                    location.reload()
+                    alert('Customer saved successfully!');
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                }
+            });
+            return false;
+        });
+
+    });
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.add-to-cart-btn').click(function () {
+            var itemId = $(this).data('item-id');
+            var table_id = '{{ table_id }}'
+            alert(itemId)
+            $.ajax({
+                type: 'POST',
+                url: '{% url "add_to_cart" %}',
+                data: {
+                    'item_id': itemId,
+                    'table_id': table_id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (data) {
+                     if (data.status === true) {
+                            alert('Item added to cart successfully');
+                        } else {
+                            alert('Failed to add item to cart');
+                        }
+                },
+
+            });
+        });
+    });
+
+</script>

@@ -1,0 +1,89 @@
+/* styles.css */
+{% load static %}
+
+body {
+    font-family: Arial, sans-serif;
+    /* Set background image to cover entire viewport */
+    background-image: url('../images/login1.jpg');
+    background-size: cover;
+    /* Center the background image */
+    background-position: center;
+    /* Prevent background image from repeating */
+    background-repeat: no-repeat;
+    /* Set background attachment to fixed to prevent scrolling */
+    background-attachment: fixed;
+    /* Set a minimum height to ensure the background image covers the entire screen */
+    min-height: 100vh;
+    /* Center content vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Adjust margin to ensure content is not touching edges */
+    margin: 0;
+}
+./* CSS for the login container */
+.login-container {
+    max-width: 400px; /* Set maximum width for better readability */
+    margin: 100px auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding for spacing */
+    background-color: #ffffff; /* Set background color to white */
+    border-radius: 10px; /* Apply border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+}
+
+/* CSS for the login form */
+.login-form {
+    margin-top: 20px; /* Add margin to separate form from container */
+}
+
+/* CSS for form elements */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%; /* Set input width to 100% */
+    padding: 10px; /* Add padding for spacing */
+    margin-bottom: 20px; /* Add margin bottom for spacing between inputs */
+    border: 1px solid #cccccc; /* Add border for visual separation */
+    border-radius: 5px; /* Apply border radius for rounded corners */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* CSS for the login button */
+.login-form input[type="submit"] {
+    width: 100%; /* Set button width to 100% */
+    padding: 10px; /* Add padding for spacing */
+    background-color: #007bff; /* Set button background color */
+    color: #ffffff; /* Set button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Apply border radius for rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}

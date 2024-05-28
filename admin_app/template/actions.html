@@ -1,0 +1,16 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+<div class="actions-row">
+    <form action="" method="post">{% csrf_token %}
+        <select name="action" required>
+            <option value="" selected="selected">Actions</option>
+            {% for action in actions %}
+                <option value="{{ action.value|escape }}">{{ action.display }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Go" />
+    </form>
+</div>
+{{ block.super }}
+{% endblock %}

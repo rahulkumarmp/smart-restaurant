@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="cart-container">
+    <h2>Cart</h2>
+    {% if is_active %}
+    {% if cart_items %}
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cart_item in cart_items %}
+        <tr>
+            <td>{{ cart_item.menu.name }}</td>
+            <td>{{ cart_item.quantity }}</td>
+            <td>{{ cart_item.total_price }}</td>
+            <td>
+                <!--                <a href="{% url 'delete_cart_item' cart_item.id %}" class="button delete-button">Delete</a>-->
+                <a href="{% url 'increase_quantity' cart_item.id %}" class="button increase-button">Add Quantity</a>
+                <a href="{% url 'decrease_quantity' cart_item.id %}" class="button increase-button">Remove Quantity</a>
+
+                <!--                {% if cart_item.quantity >= 2 %}-->
+                <!--                {% endif %}-->
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">Total Amount</td>
+            <td>{{ total }}</td>
+        </tr>
+        </tfoot>
+    </table>
+    <button id="confirm-order-btn" class="confirm-order-btn">Confirm Order</button>
+    {% else %}
+    <p>Your cart is empty.</p>
+    {% endif %}
+    {% else %}
+    <p>Please log in to view your cart.</p>
+    {% endif %}
+    <a id="confirm-order-btnn" href="{% url 'home' %}" class="button">Back to Order Page</a>
+
+</div>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Cart Page</title>-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--    <style>-->
+<!--        body {-->
+<!--            background-color: #f8f9fa; /* Light gray background color */-->
+<!--            font-family: Arial, sans-serif;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 1200px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px;-->
+<!--        }-->
+
+<!--        .cart-heading {-->
+<!--            font-size: 24px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .cart-item {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            border-bottom: 1px solid #dee2e6;-->
+<!--            padding: 10px 0;-->
+<!--        }-->
+
+<!--        .cart-item img {-->
+<!--            max-width: 100px;-->
+<!--            margin-right: 20px;-->
+<!--        }-->
+
+<!--        .cart-item-details {-->
+<!--            flex-grow: 1;-->
+<!--        }-->
+
+<!--        .cart-item-name {-->
+<!--            font-weight: bold;-->
+<!--            margin-bottom: 5px;-->
+<!--        }-->
+
+<!--        .cart-item-price {-->
+<!--            color: #007bff;-->
+<!--        }-->
+
+<!--        .checkout-btn {-->
+<!--            background-color: #28a745;-->
+<!--            color: #fff;-->
+<!--            border: none;-->
+<!--            padding: 10px 20px;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .checkout-btn:hover {-->
+<!--            background-color: #218838;-->
+<!--        }-->
+
+<!--        @media (max-width: 768px) {-->
+<!--            .cart-item img {-->
+<!--                max-width: 80px;-->
+<!--            }-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <h1 class="cart-heading">Your Cart</h1>-->
+
+<!--    <div class="cart-item">-->
+<!--        <img src="https://via.placeholder.com/150" alt="Product Image">-->
+<!--        <div class="cart-item-details">-->
+<!--            <div class="cart-item-name">Product Name</div>-->
+<!--            <div class="cart-item-price">$20.00</div>-->
+<!--        </div>-->
+<!--        <div class="cart-item-quantity">-->
+<!--            <input type="number" value="1" min="1">-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="cart-item">-->
+<!--        <img src="https://via.placeholder.com/150" alt="Product Image">-->
+<!--        <div class="cart-item-details">-->
+<!--            <div class="cart-item-name">Another Product Name</div>-->
+<!--            <div class="cart-item-price">$30.00</div>-->
+<!--        </div>-->
+<!--        <div class="cart-item-quantity">-->
+<!--            <input type="number" value="1" min="1">-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <button class="checkout-btn">Proceed to Checkout</button>-->
+<!--</div>-->
+
+<!--</body>-->

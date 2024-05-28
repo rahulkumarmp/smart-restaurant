@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Food Ordering </title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to Food Ordering Website</h2>
+<!--        <form action="/home/" method="post">-->
+        <form id="login-form">
+
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username or Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
+
+<div id="login-result"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#login-form').submit(function(e) {
+            e.preventDefault(); // Prevent default form submission
+            var formData = $(this).serialize(); // Serialize form data
+            $.ajax({
+                type: 'POST',
+                url: '/login/', // URL to your login view
+                data: formData,
+                success: function(response) {
+                    // Handle successful login
+                    // $('#login-result').html('<p>Login successful!</p>');
+                    window.location.href = '/home/'; // Redirect to home page
+                },
+                error: function(xhr, status, error) {
+                    // Handle login error
+                    $('#login-result').html('<p>Login failed. Please try again.</p>');
+                }
+            });
+        });
+    });
+</script>
