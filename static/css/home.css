@@ -11,7 +11,7 @@
 }
 
 body {
-    background-color: #977575; /* Light gray background color */
+    background-color: #ffffff; /* Light gray background color */
 }
 
 .popup-content {
@@ -130,7 +130,12 @@ input[type="tel"] {
 
 #food-images {
     /* Styles for food images */
-    flex: 1; /* Take remaining space */
+    /*flex: 1; !* Take remaining space *!*/
+    background-image: url('/static/images/login.jpg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
 }
 
 #food-imagess {
@@ -195,7 +200,7 @@ input[type="tel"] {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    background-color: #301111;
+    background-color: #4a7b47;
 }
 
 .cart-btn {

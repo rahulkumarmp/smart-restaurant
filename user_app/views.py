@@ -60,9 +60,7 @@ def add_customer(request):
 #     return render(request, 'user/cart.html', {'is_active': is_active})
 
 def add_to_cart(request):
-    print(request.method, 'kk')
     if request.method == 'POST':
-        print('jj')
         item_id = request.POST.get('item_id')
         table_id = request.POST.get('table_id')
         # Assuming you have a method to get the item from the database
@@ -113,3 +111,10 @@ def decrease_quantity(request, cart_item_id):
     cart_item.quantity -= 1
     cart_item.save()
     return redirect('cart')
+
+def confirm_order(request, table_id):
+    if request.method == 'POST':
+        table = get_object_or_404(Table, id=table_id)
+        Cart.objects.filter(table=table, is_ordered=False).update(is_ordered=True)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'fail', 'message': 'Invalid request method'}, status=400)

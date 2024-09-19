@@ -12,12 +12,12 @@
     {% if not is_active %}
     <div id="food-images">
         <!-- Add your food images here -->
-        <img src="/static/images/login.jpg" alt="Food Image 1">
-        <img src="/static/images/login.jpg" alt="Food Image 2">
-        <img src="/static/images/login.jpg" alt="Food Image 1">
-        <img src="/static/images/login.jpg" alt="Food Image 2">
-        <img src="/static/images/login.jpg" alt="Food Image 1">
-        <img src="/static/images/login.jpg" alt="Food Image 2">
+{#        <img src="/static/images/login.jpg" alt="Food Image 1">#}
+{#        <img src="/static/images/login.jpg" alt="Food Image 2">#}
+{#        <img src="/static/images/login.jpg" alt="Food Image 1">#}
+{#        <img src="/static/images/login.jpg" alt="Food Image 2">#}
+{#        <img src="/static/images/login.jpg" alt="Food Image 1">#}
+{#        <img src="/static/images/login.jpg" alt="Food Image 2">#}
         <!-- Add more food images as needed -->
     </div>
     {% else %}
@@ -32,7 +32,8 @@
             {% for item in menu %}
             <div class="menu-item">
                 <div class="menu-image">
-                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                    {%  load custom_filters %}
+                    <img src="{{ item.image.url|trim_media}}" alt="{{ item.name }}">
                 </div>
                 <div class="menu-details">
                     <h2>{{ item.name }}</h2>
@@ -164,7 +165,6 @@
         $('.add-to-cart-btn').click(function () {
             var itemId = $(this).data('item-id');
             var table_id = '{{ table_id }}'
-            alert(itemId)
             $.ajax({
                 type: 'POST',
                 url: '{% url "add_to_cart" %}',
@@ -177,7 +177,6 @@
                      if (data.status === true) {
                             alert('Item added to cart successfully');
                         } else {
-                            alert('Failed to add item to cart');
                         }
                 },
 

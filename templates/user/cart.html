@@ -47,7 +47,7 @@
         </tr>
         </tfoot>
     </table>
-    <button id="confirm-order-btn" class="confirm-order-btn">Confirm Order</button>
+    <button id="confirm-order-btnn" class="confirm-order-btn">Confirm Order</button>
     {% else %}
     <p>Your cart is empty.</p>
     {% endif %}
@@ -60,7 +60,34 @@
 </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#confirm-order-btn').click(function() {
+            alert('jj');
+            const tableId = {{ table.id }};  // Replace with the actual table ID
 
+            $.ajax({
+                url: `/confirm-order/${tableId}/`,
+                type: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token for security
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert('Order confirmed successfully!');
+                        // Optionally, update the UI to reflect the order confirmation
+                    } else {
+                        alert('Failed to confirm order.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred: ' + error);
+                }
+            });
+        });
+    });
+</script>
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->

@@ -70,3 +70,21 @@ class InvoiceAdmin(admin.ModelAdmin):
 admin.site.register(Table,TableAdmin)
 admin.site.register(Menu, MenuAdmin)
 # admin.site.register(Invoice)
+
+
+@admin.register(Cart)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Cart._meta.fields]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(is_ordered=False)
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['title'] = 'Orders'
+        return super(OrderAdmin, self).changelist_view(request, extra_context=extra_context)
+
+    class Meta:
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'

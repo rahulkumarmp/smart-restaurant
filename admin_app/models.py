@@ -48,6 +48,9 @@ class Menu(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
     @classmethod
     def get_todays_menu(cls):
         today = date.today()
